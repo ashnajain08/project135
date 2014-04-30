@@ -1,7 +1,9 @@
 <%@page import = "java.sql.*"%>
 <html>
   <head>
-    <title>product browsing</title>
+    <title>Product Browsing</title>
+<LINK href="stylesheet.css" rel="stylesheet" type="text/css">
+
   </head>
   <body>
     <%
@@ -13,10 +15,10 @@
 	<%
 	  } else {
 	%>
-	    Hello: <%=username%> <br>
+	    Logged In User: <%=username%> <br>
+	    <a style="color : #663300; margin-left : 90%" href="checkout.jsp">CheckOut</a>
 	    <div align="center"><font size="16">Browsing page</font></div>
 	    <div align="right">
-	    <a href="checkout.jsp">checkout</a>
 	    </div><hr>
 
 	    <%-- open sql connection --%>

@@ -3,7 +3,9 @@
 
 <html>
   <head>
-    <title>confirm page</title>
+    <title>Confirmation Page</title>
+	<LINK href="stylesheet.css" rel="stylesheet" type="text/css">
+    
     <%String username = (String)(session.getAttribute("username"));
       int userid = (Integer)session.getAttribute("userid");
 	  if (session.getAttribute("mycart")==null) {

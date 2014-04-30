@@ -3,22 +3,36 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
-<title>Insert title here</title>
+<title>eShop</title>
+<LINK href="stylesheet.css" rel="stylesheet" type="text/css">
 </head>
 <body>
-<h1>Login Page</h1>
 <center>
-<h2>Sign In Details</h2>
-<form action="loginCheck.jsp" method="post">
-<br/>Username:<input type="text" name="username">
-<br/><input type="submit" value="Submit">
+<h2 style="margin-top : 5%;font-size: 35px">Welcome to eShop</h2> 
+<br/><br/>
+<form class="myform" action="loginCheck.jsp" method="post"> 
+   
+    <p> 
+    	<label for="name">Username</label>
+        <input type="text" name="username" id="name" /> 
+    </p> 
+    <br/>
+   
+    <p class="mySubmit"> 
+        <input type="submit" value="LogIn" /> 
+    </p> 
+   
 </form>
-<br/>
-<form action="signUp.jsp">
- <br/>New User:<input type="submit" value="Sign Up">
+<br/><br/><br/>
+<form class="myform" action="signUp.jsp"> 
+     
+     <label for="newUser">New User</label> 
+     <br/>
+      <p class="mySubmit"> 
+     <input  type="submit" value="Sign Up" />
+   </p>
 </form>
-</center>	
+</center>
 </body>
 </html>
 

@@ -7,18 +7,9 @@
 <LINK href="stylesheet.css" rel="stylesheet" type="text/css">
 </head>
 <body>
-
-<br/><br/><br/><br/><br/> 
-<center> 
-<h2> 
-<% 
-String a=session.getAttribute("username").toString(); 
-out.println("Hello "+a); 
-%> 
-</h2> 
-<br/> <br/> 
-<a style ="color: #663300" href="browsing.jsp">Shop Today</a>
-</center> 
-
+<center style="margin-top: 10%">
+Congratulations! You successfully signed up. Please log in to continue. <br/><br/>
+<a style ="color: #663300" href="mainPage.jsp">Sign in from Home Page</a>
+</center>
 </body>
 </html>

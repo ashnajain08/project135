@@ -3,8 +3,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
-<title>Insert title here</title>
+<title>eShop</title>
+<LINK href="stylesheet.css" rel="stylesheet" type="text/css">
 </head>
 <body>
 
@@ -27,7 +27,7 @@ try {
         "jdbc:postgresql://localhost:5432/cse135?" +
         "user=postgres&password=iphone");
     // Create the statement
-    String query = "select id from users where uname= ?";
+    String query = "select uid from users where uname= ?";
 	pstmt = conn.prepareStatement(query);
 	pstmt.setString(1, username);
 	rs = pstmt.executeQuery();
@@ -41,13 +41,13 @@ try {
 	pstmt1 = conn.prepareStatement("INSERT INTO users (uname,role,age,state) VALUES (?, ?, ?, ?)");
     pstmt1.setString(1, username);
     pstmt1.setString(2,role);
-    pstmt1.setInt(3, age);
+    pstmt1.setInt(3,age );
     pstmt1.setString(4, state);
     int rowCount = pstmt1.executeUpdate();
     // Commit transaction
     conn.commit();
     conn.setAutoCommit(true);
-	response.sendRedirect("mainPage.jsp");	
+	response.sendRedirect("signUpConfirm.jsp");	
 	}
 	else
 	{
