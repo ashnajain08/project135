@@ -7,18 +7,10 @@
 <LINK href="stylesheet.css" rel="stylesheet" type="text/css">
 </head>
 <body>
-
-<br/><br/><br/><br/><br/> 
-<center> 
-<h2> 
-<% 
-String a=session.getAttribute("username").toString(); 
-out.println("Hello "+a); 
-%> 
-</h2> 
-<br/> <br/> 
-<a style ="color: #663300" href="browsing.jsp">Shop Today</a>
-</center> 
-
+<center style="margin-top: 10%">
+Sorry, category is referred to by a product! <br/><br/>
+<a style ="color: #663300" href="homeOwner.jsp">Main menu</a> <br/>
+<a style ="color: #663300" href="ownerCategories.jsp">Browse Categories</a>
+</center>
 </body>
 </html>

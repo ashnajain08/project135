@@ -1,17 +1,21 @@
 <html>
-
+<head>
+<title>eShop</title>
+<LINK href="stylesheet.css" rel="stylesheet" type="text/css">
+</head>
 <body>
-<table>
-    <tr>
-        <td>
+Logged In Owner : <%=session.getAttribute("username")%> <br>
+<a style="color : #663300; margin-left : 90%" href="homeOwner.jsp">Homepage</a>
+     
             <%-- Import the java.sql package --%>
             <%@ page import="java.sql.*"%>
             <%-- -------- Open Connection Code -------- --%>
             <%    
             Connection conn = null;
             PreparedStatement pstmt = null;
+            PreparedStatement pstmt1 = null;
             ResultSet rs = null;
-            
+            ResultSet rs1 = null; 
             try 
             {
                 // Registering Postgresql JDBC driver with the DriverManager
@@ -46,16 +50,16 @@
                 if (action != null && action.equals("update")) 
                 {
                 	
-                    String query = "select id from categories where cname= ?";
+                    String query = "select cid from categories where cname= ?";
                 	pstmt = conn.prepareStatement(query);
                 	pstmt.setString(1, request.getParameter("cname"));
                 	rs = pstmt.executeQuery();
-                	int id = (rs.getInt("id"));
+                	int id = (rs.getInt("cid"));
                 	pstmt.close();
                 	rs.close();
                 	
                 	conn.setAutoCommit(false);
-                    pstmt = conn.prepareStatement("UPDATE students SET cname = ?,description = ? WHERE id = ?");
+                    pstmt = conn.prepareStatement("UPDATE students SET cname = ?,description = ? WHERE cid = ?");
                     pstmt.setInt(3, id);
                     pstmt.setString(1, request.getParameter("cname"));
                     pstmt.setString(2, request.getParameter("desc"));
@@ -66,30 +70,33 @@
                     pstmt.close();
                 }
             %>
-            
             <%-- -------- DELETE Code -------- --%>
             <%
                 if (action != null && action.equals("delete")) 
                 {
                 
 					//Check if category is refered by a product
-                    String query = "select id from products NATURAL JOIN categories where cname= ?";
-                	pstmt = conn.prepareStatement(query);
-                	pstmt.setString(1, request.getParameter("cname"));
-                	rs = pstmt.executeQuery();
-                	pstmt.close();
-                	if(!rs.next())
-                	{
+					String query = "select pid from categories,products where categories.cid=products.category and cname= ?";
+                	pstmt1 = conn.prepareStatement(query);
+                	pstmt1.setString(1, request.getParameter("cname"));
+                	rs1 = pstmt1.executeQuery();
+					if(rs1.next())
+					{
+						response.sendRedirect("error2.jsp");
+					}
+					else
+					{
                     conn.setAutoCommit(false);
-                    pstmt = conn.prepareStatement("DELETE FROM Students WHERE cname = ?");
+                    pstmt = conn.prepareStatement("DELETE FROM categories WHERE cname = ?");
                     pstmt.setString(1, request.getParameter("cname"));
                     int rowCount = pstmt.executeUpdate();
                     // Commit transaction
                     conn.commit();
                     conn.setAutoCommit(true);
                     pstmt.close();
-                    rs.close();
-                	}
+					}
+					pstmt1.close();
+                    rs1.close();
                 }
             %>
             <%-- -------- SELECT Statement Code -------- --%>
@@ -97,29 +104,37 @@
                 Statement statement = conn.createStatement();
                 rs = statement.executeQuery("SELECT * FROM categories");
             %> 
-            <!-- Add an HTML table header row to format the results -->
-            <table border="1">
-            <tr>
-                <th>Category Name</th>
-                <th>Description</th>
-            </tr>
             
+<div class="content"> 
+<h1>New Category</h1>      
+      <table class="newCategories">
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+        <th></th>
+      </tr>      
             <tr>
                 <form action="ownerCategories.jsp" method="POST">
                     <input type="hidden" name="action" value="insert"/>
-                    <th>&nbsp;</th>
+                    <%--  <th>&nbsp;</th> --%>
                     <th><input value="" name="cname" size="10"/></th>
                     <th><input value="" name="desc" size="30"/></th>
                     <th><input type="submit" value="Insert"/></th>
                 </form>
             </tr>
-
+        </table>
+        <br/>
+  		<table class="categories">
+  		<h1>Categories</h1>
+            <tr>
+                <th>Category Name</th>
+                <th>Description</th>
+            </tr>  
             <%-- -------- Iteration Code -------- --%>
             <%
                 // Iterate over the ResultSet
                 while (rs.next()) {
             %>
-
             <tr>
                 <form action="ownerCategories.jsp" method="POST">
                     <input type="hidden" name="action" value="update"/>
@@ -127,24 +142,46 @@
                 <td>
                     <input value="<%=rs.getString("cname")%>" name="cname" size="15"/>
                 </td>
-
                 <td>
-                    <input value="<%=rs.getString("desc")%>" name="desc" size="30"/>
+                    <input value="<%=rs.getString("description")%>" name="desc" size="30"/>
                 </td>
-
                 <%-- Button --%>
                 <td><input type="submit" value="Update"></td>
                 </form>
+           
                 <form action="ownerCategories.jsp" method="POST">
                     <input type="hidden" name="action" value="delete"/>
                     <input type="hidden" value="<%=rs.getString("cname")%>" name="cname"/>
                     <%-- Button --%>
-                <td><input type="submit" value="Delete"/></td>
-                </form>
-            </tr>
+                    <%
+                    String query = "select pid from categories,products where categories.cid=products.category and cname= ?";
+                	pstmt = conn.prepareStatement(query);
+                	pstmt.setString(1, rs.getString("cname"));
+                	rs1 = pstmt.executeQuery();
+                	if(rs1.next())
+                	{
+                	%>
+                		 <td><input type="submit" value="Delete" disabled="disabled"/></td> 	
+                	<%
+                	}
+                	else
+                	{
+                	%>
+                		<td><input type="submit" value="Delete" /></td> 
+                	<%
+                	}
+                	pstmt.close();
+                	rs1.close();
+                    
+                    %>
+     
             <%
                 }
             %>
+                      </form>
+            </tr>
+            </table>
+</div><!-- end .content -->
             <%-- -------- Close Connection Code -------- --%>
             <%
                 // Close the ResultSet
@@ -185,10 +222,7 @@
                 }
             }
             %>
-        </table>
-        </td>
-    </tr>
-</table>
+        
 </body>
 
 </html>

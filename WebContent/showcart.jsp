@@ -1,7 +1,11 @@
 <%-- A module just for showing cart --%>
-
+<html>
+<head>
+<title>eShop</title>
+<LINK href="stylesheet.css" rel="stylesheet" type="text/css">
+</head>
 <%@page import="java.util.*, orderitem.*" %>
-
+<body>
 <b>My Cart</b>
 <%
   if (session.getAttribute("mycart")==null) {
@@ -39,4 +43,5 @@
 	  <th><%=total_price%></th>
     </tr>
 </table>
-
+</body>
+</html>

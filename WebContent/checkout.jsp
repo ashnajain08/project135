@@ -1,6 +1,8 @@
 <html>
   <head>
-    <title>checkout page</title>
+    <title>Checkout Page</title>
+	<LINK href="stylesheet.css" rel="stylesheet" type="text/css">
+
     <%-- Initialization code for session variable --%>
 	<%
 	  String username = (String)(session.getAttribute("username"));

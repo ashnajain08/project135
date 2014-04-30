@@ -3,18 +3,30 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
-<title>Insert title here</title>
+<title>eShop</title>
+<LINK href="stylesheet.css" rel="stylesheet" type="text/css">
 </head>
 <body>
-<form action="signUpCheck.jsp" method="POST">
-                    Username : <input type="text" name="username" /><br/>
-                    First Name : <input type="text" name="firstname" /> <br/>
-                    Last Name :<input type="text" name="lastname"/> <br/>
-                    Role : <input type="radio" name="role" value="user"> User
-					<input type="radio" name="role" value="owner"> Owner <br>
-                    Age : <input type="text" name="Age"/><br/>
-                    State : 
+<center>
+<form style="margin-top: 10%" class="myForm" action="signUpCheck.jsp" method="POST">
+                    <p class="name"> 
+                    Username
+                    <input type="text" name="username" /><br/>
+                    </p>
+                    <br/>
+                    <p>
+                    Role &nbsp &nbsp &nbsp
+                    <label style="color:#663300">User</label><input style ="width:20px" class="myInput" type="radio" name="role" value="user"> 
+                    <label style="color:#663300">Owner</label><input style ="width:20px" class ="myInput" type="radio" name="role" value="owner">
+                    </p>
+                    <br/>
+					<p class="name">                   
+                    Age
+                    <input style = "width:50px" class="myInput" type="text" name="age"/>
+                    </p>
+                    <br/>
+                    <p class="name">
+                    State
                     <select name="state">
                     <option value="AL">AL</option>
 					<option value="AK">AK</option>
@@ -67,7 +79,12 @@
 					<option value="WI">WI</option>
 					<option value="WY">WY</option>
 					</select>
+					</p>
+					<br/><br/>
+					<p class="mySubmit">
                     <input type="submit" value="submit"/>
+                    </p>
                 </form>
+     </center>
 </body>
 </html>

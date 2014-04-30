@@ -1,6 +1,8 @@
 <%@page import="java.util.*, orderitem.*" %>
 <html>
   <head>
+
+<LINK href="stylesheet.css" rel="stylesheet" type="text/css">
 	<%-- Initialization code for session variable --%>
 	<%
 	  String username = (String)(session.getAttribute("username"));
@@ -10,7 +12,7 @@
 	  }
 	  HashMap<Integer, OrderItem> myCart = (HashMap<Integer, OrderItem>)session.getAttribute("mycart");
 	%>
-	<title>order page</title>
+	<title>Order Page</title>
   <head>
   <body>
 	Hello: <%=username%> <br>
