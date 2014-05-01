@@ -10,14 +10,19 @@
 	%>
   </head>
   <body>
-	Hello: <%=username%> <br>
-	<div align="center"><font size="16">Checkout page</font></div>
-    <hr>
+	Logged In Owner : <%=session.getAttribute("username")%> <br>
+<a style="color : #663300; margin-left : 90%" href="checkout.jsp">Checkout</a>
+	<center><h1>Checkout page</h1></center>
 	<jsp:include page="showcart.jsp"/>
 	<hr>
-	<form action="confirm.jsp" method="POST">
-	  Credit card:<input name="cardnum" value=""/>
+	<form class ="myForm" action="confirm.jsp" method="POST">
+	  <p>
+	  <label>Credit card</label>
+	  <input name="cardnum" value=""/>
+	  </p>
+	  <p class="mySubmit">
 	  <input type="submit" value="purchase"/>
+	  </p>
 	</form>
   </body>
 </html>

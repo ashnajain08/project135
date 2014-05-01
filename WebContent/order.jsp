@@ -15,9 +15,12 @@
 	<title>Order Page</title>
   <head>
   <body>
-	Hello: <%=username%> <br>
-	<div align="center"><font size="16">Order page</font></div>
-    <hr>
+	Logged In Owner : <%=session.getAttribute("username")%> <br>
+<a style="color : #663300; margin-left : 90%" href="checkout.jsp">Checkout</a>
+	<div class="header">
+			<h1>Order</h1>
+			<!-- end .header -->
+		</div>
 
 	<%
 	  String action = request.getParameter("action");
@@ -39,7 +42,8 @@
 	    response.sendRedirect("browsing.jsp"); 
 	  }
 	  //If action is order
-	  else if (action != null && action.equals("order")) {
+	  else if (action != null && action.equals("order")) 
+	  {
 	    int pid = Integer.parseInt(request.getParameter("pid"));
 	    String pname  = request.getParameter("pname");
 	    int price = Integer.parseInt(request.getParameter("price"));
@@ -47,12 +51,12 @@
 
 	<%-- Show current product and issue put in cart command --%>
 	Current Product
-	<table border="1">
+	<table class="products">
 	<tr>
-	  <th>pid</th>
-	  <th>pname</th>
-	  <th>price</th>
-	  <th>num</th>
+	  <th>Product ID</th>
+	  <th>Name</th>
+	  <th>Price</th>
+	  <th>Quantity</th>
 	</tr>
 	<tr>
 	  <td><%=pid%></td>
@@ -68,7 +72,7 @@
 	  </form>
 	</tr>
 	</table>
-	<hr>
+<br/><br/>
     <%-- show my cart --%>
 	<jsp:include page="showcart.jsp"/>
 	<%

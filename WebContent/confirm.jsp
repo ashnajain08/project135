@@ -15,10 +15,11 @@
     %>
   </head>
   <body>
-    Hello: <%=username%> <br>
-	<div align="center"><font size="16">Confirm page</font></div>
-	Your order is successfully put.
-    <hr>
+    Logged In Owner : <%=session.getAttribute("username")%> <br>
+	<a style="color : #663300; margin-left : 90%" href="checkout.jsp">Checkout</a>
+	<center><h1>Confirm page</h1>
+	Your order is successfully put
+	</center>
 	<jsp:include page="showcart.jsp"/>
 	<hr>
 
@@ -87,7 +88,7 @@
       session.setAttribute("mycart", new HashMap<Integer, OrderItem>());
 	  //response.setHeader("Refresh", "5, browsing.jsp");
 	%>
-	<a href="browsing.jsp">back to browsing</a>
+	<a style="color : #663300" href="browsing.jsp">Back to browsing</a>
  
   </body>
 </html>

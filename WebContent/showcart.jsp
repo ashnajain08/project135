@@ -6,19 +6,19 @@
 </head>
 <%@page import="java.util.*, orderitem.*" %>
 <body>
-<b>My Cart</b>
+<h1>My Cart</h1>
 <%
   if (session.getAttribute("mycart")==null) {
     session.setAttribute("mycart", new HashMap<Integer, OrderItem>());
   }
   HashMap<Integer, OrderItem> myCart = (HashMap<Integer, OrderItem>)session.getAttribute("mycart");
 %>
-<table border="1">
+<table class="products">
 	<tr>
-	  <th>pid</th>
-	  <th>pname</th>
-	  <th>num</th>
-	  <th>price</th>
+	  <th>Product ID</th>
+	  <th>Name</th>
+	  <th>Quantity</th>
+	  <th>Price</th>
 	</tr>
 	<%
 	  int total_price = 0;
@@ -38,7 +38,7 @@
 	%>
 	<tr>
 	  <th></th>
-	  <th>total</th>
+	  <th>Total</th>
 	  <th></th>
 	  <th><%=total_price%></th>
     </tr>
