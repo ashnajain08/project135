@@ -13,8 +13,8 @@
 <h2> 
 <% 
 String a=session.getAttribute("username").toString(); 
-out.println("Hello "+a); 
-%> 
+out.println("Hello "+a);
+%>
 </h2> 
 <br/> <br/> 
 <a style ="color: #663300" href="browsing.jsp">Shop Today</a>

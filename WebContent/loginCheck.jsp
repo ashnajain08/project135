@@ -10,11 +10,11 @@
 <%@ page import="java.sql.*" %>
 <%
 
-String username=request.getParameter("username"); 
-
 Connection conn = null;
 PreparedStatement pstmt = null;
 ResultSet rs = null;
+ResultSet rs1=null;
+Statement st;
 
 try {
     // Registering Postgresql JDBC driver with the DriverManager
@@ -24,22 +24,43 @@ try {
     conn = DriverManager.getConnection(
         "jdbc:postgresql://localhost:5432/cse135?" +
         "user=postgres&password=iphone");
+    
+    
+    String username=request.getParameter("username"); 
+    if(!username.equals(session.getAttribute("username")))
+    {
+    	session.setAttribute("mycart", null);
+    	st=conn.createStatement();
+    	rs1 = st.executeQuery("SELECT * FROM users WHERE uname='" + username + "'");
+    	if (rs1.next()) 
+    	{
+    		session.setAttribute("username", rs1.getString("uname"));
+    		session.setAttribute("userid", 1);
+    	}
+    }
+    
     // Create the statement
    String query = "select role from users where uname= ?";
 	pstmt = conn.prepareStatement(query);
 	pstmt.setString(1, username);
 	rs = pstmt.executeQuery();
-	if(rs.next()){
-	String role1 = rs.getString("role");
-	session.setAttribute("username",username); 
-	if(role1.equalsIgnoreCase("user"))
-	{response.sendRedirect("homeUser.jsp");}
-	else
-	{response.sendRedirect("homeOwner.jsp");}	
+	if(rs.next())
+	{
+		String role1 = rs.getString("role");
+		if(role1.equalsIgnoreCase("user"))
+		{
+			
+			response.sendRedirect("homeUser.jsp");
+		}
+		else
+		{
+			session.setAttribute("username", username);
+			response.sendRedirect("homeOwner.jsp");
+		}	
 	}
 	else
 	{
-	response.sendRedirect("error.jsp");
+		response.sendRedirect("error.jsp");
 	}
 	rs.close();
 
